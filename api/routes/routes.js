@@ -5,10 +5,28 @@ require('dotenv').config();
 const jwtKey = process.env.JWT_SECRET
 
 const User = require('../../user/user_model');
+const Habit = require('../../habits/habits_model');
 
 module.exports = server => {
     server.post('/api/register', register);
     server.post('/api/login', login);
+    server.post('/api/new_habit', newHabit);
+}
+
+async function newHabit (req, res){
+    let habit = req.body;
+    let { username } = req.headers;
+    console.log(habit, username);
+    if(habit && username){
+        try{
+            const newHabit = await Habit.addHabit(habit, username);
+            res.status(201).json(newHabit)
+        }catch(e){
+            res.status(500).json({message: `${e}`})
+        }
+    }else{
+        res.status(401).json({message: "Habit couldn't be added"})
+    }
 }
 
 async function register (req, res){
