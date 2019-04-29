@@ -3,7 +3,8 @@ const db =  require('../data/dbConfig');
 module.exports = {
     add,
     findBy,
-    findById
+    findById,
+    getUserHabits
 }
 
 async function add(user){
@@ -22,4 +23,16 @@ function findBy(username){
     return db('user')
         .where({username})
         .first();
+}
+
+async function getUserHabits(username){
+    const user = await findBy(username);
+    console.log(user)
+    if(user){
+        return db('habits')
+        .join('user', {'user.id': 'habits.user_id'})
+        .where('user.id', `${user.id}`)
+    }else{
+        return 'this user does not exist';
+    }
 }

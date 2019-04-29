@@ -11,12 +11,22 @@ module.exports = server => {
     server.post('/api/register', register);
     server.post('/api/login', login);
     server.post('/api/new_habit', newHabit);
+    server.get('/api/habits', allHabits)
+}
+
+async function allHabits(req, res){
+    let { username } = req.headers;
+    try{
+        const habits = await User.getUserHabits(username)
+        res.status(200).json(habits)
+    }catch(e){
+        res.status(500).json({message: `${e}`})
+    }
 }
 
 async function newHabit (req, res){
     let habit = req.body;
     let { username } = req.headers;
-    console.log(habit, username);
     if(habit && username){
         try{
             const newHabit = await Habit.addHabit(habit, username);
