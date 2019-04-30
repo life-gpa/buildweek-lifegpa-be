@@ -6,7 +6,9 @@
   "author": "Alando Appling <alandoappling@gmail.com>",
   "license": "MIT",
   "scripts": {
-
+    "test": "jest --watch --verbose",
+    "server": "nodemon index.js",
+    "start": "index.js"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
