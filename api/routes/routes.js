@@ -71,7 +71,7 @@ async function login (req, res){
             res.status(401).json({message: 'Invalid Credentials'})
         }
     }catch(e){
-        res.status(500).json({message: `${e}`})
+        res.status(500).json({message: `login ${e}`})
     }
 }
 
