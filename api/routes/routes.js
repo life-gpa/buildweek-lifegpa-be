@@ -6,12 +6,13 @@ const jwtKey = process.env.JWT_SECRET
 
 const User = require('../../user/user_model');
 const Habit = require('../../habits/habits_model');
+const { authenticate } = require('../../auth/authenticate')
 
 module.exports = server => {
     server.post('/api/register', register);
     server.post('/api/login', login);
-    server.post('/api/new_habit', newHabit);
-    server.get('/api/habits', allHabits)
+    server.post('/api/new_habit', authenticate, newHabit);
+    server.get('/api/habits', authenticate, allHabits)
 }
 
 async function allHabits(req, res){

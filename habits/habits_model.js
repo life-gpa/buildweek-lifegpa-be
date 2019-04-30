@@ -18,3 +18,4 @@ async function addHabit(habit, username){
         return 'user does not exist'
     }
 }
+
