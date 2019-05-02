@@ -13,6 +13,16 @@ module.exports = server => {
     server.post('/api/login', login);
     server.post('/api/new_habit', authenticate, newHabit);
     server.get('/api/habits', authenticate, allHabits)
+    server.get('/api/users', allUser)
+}
+
+async function allUser(req,res){
+    try{
+        const user = await User.allUsers();
+        res.status(200).json(user)
+    }catch(e){
+        res.status(500).json({message: `${e}`})
+    }
 }
 
 async function allHabits(req, res){

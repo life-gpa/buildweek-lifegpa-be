@@ -1,10 +1,15 @@
 const db =  require('../data/dbConfig');
 
 module.exports = {
+    all,
     add,
     findBy,
     findById,
     getUserHabits
+}
+
+async function all(user){
+    return db('user')
 }
 
 async function add(user){
