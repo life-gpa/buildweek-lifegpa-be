@@ -64,6 +64,7 @@ async function login (req, res){
         if(userLogin && bcrypt.compareSync(password, userLogin.password)){
             const token = generateToken(userLogin)
             res.status(200).json({
+                username,
                 token,
                 message: 'Successfully logged in!'
             })
