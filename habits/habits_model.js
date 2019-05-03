@@ -13,7 +13,6 @@ async function addHabit(habit, username){
         await db('habits').insert({habit_name: habit.habit_name,
                             score: habit.score,
                             user_id: `${user.id}`})
-        return db('habits');
     }else{
         return 'user does not exist'
     }

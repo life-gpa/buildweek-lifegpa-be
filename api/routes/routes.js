@@ -12,20 +12,12 @@ module.exports = server => {
     server.post('/api/register', register);
     server.post('/api/login', login);
     server.post('/api/new_habit', authenticate, newHabit);
-    server.get('/api/habits', authenticate, allHabits)
+    server.get('/api/habits', authenticate, allHabits);
     server.get('/api/users', allUser)
 }
 
-async function allUser(req,res){
-    try{
-        const user = await User.allUsers();
-        res.status(200).json(user)
-    }catch(e){
-        res.status(500).json({message: `${e}`})
-    }
-}
-
 async function allHabits(req, res){
+    console.log("habits",req.headers);
     let { username } = req.headers;
     try{
         const habits = await User.getUserHabits(username)
@@ -58,7 +50,7 @@ async function register (req, res){
             user.password = hash;
 
             const newUser = await User.add(user)
-            res.status(201).json(newUser)
+            res.status(201).json({message: 'user created successfully'})
         }catch(e){
             res.status(500).json({message: `${e}`})
         }
