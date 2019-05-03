@@ -13,7 +13,6 @@ module.exports = server => {
     server.post('/api/login', login);
     server.post('/api/new_habit', authenticate, newHabit);
     server.get('/api/habits', authenticate, allHabits);
-    server.get('/api/users', allUser)
 }
 
 async function allHabits(req, res){
