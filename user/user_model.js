@@ -1,15 +1,10 @@
 const db =  require('../data/dbConfig');
 
 module.exports = {
-    allUsers,
     add,
     findBy,
     findById,
     getUserHabits
-}
-
-async function allUsers(){
-    return db('user')
 }
 
 async function add(user){
@@ -32,7 +27,6 @@ function findBy(username){
 
 async function getUserHabits(username){
     const user = await findBy(username);
-    console.log(user)
     if(user){
         return db('habits')
         .join('user', {'user.id': 'habits.user_id'})
